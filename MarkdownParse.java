@@ -3,6 +3,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.spec.ECField;
 import java.util.ArrayList;
 
 public class MarkdownParse {
@@ -11,12 +12,10 @@ public class MarkdownParse {
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then read link upto next )
         int currentIndex = 0;
-        for (int i = currentIndex; i < markdown.length(); i++) {
-
-        }
         while(currentIndex < markdown.length()) {
+            int exclamation = markdown.indexOf("![", currentIndex);
+
             int openBracket = markdown.indexOf("[", currentIndex);
-            System.out.println(openBracket);
             if (openBracket == -1) {
                 break;
             }
@@ -24,7 +23,14 @@ public class MarkdownParse {
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
             toReturn.add(markdown.substring(openParen + 1, closeParen));
+
+            // if (exclamation == -1) {
+            //     toReturn.add(markdown.substring(openParen + 1, closeParen));
+            // }
+            
+
             currentIndex = closeParen + 1;
+            
         }
 
         return toReturn;

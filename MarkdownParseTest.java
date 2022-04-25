@@ -28,4 +28,11 @@ public class MarkdownParseTest {  // class for tests
         String fileContent = Files.readString(filePath);
         assertEquals("Check for right links", List.of("https://www.google.com/"), MarkdownParse.getLinks(fileContent));
     }
+
+    @Test
+    public void testGetLinks2() throws IOException{
+        Path filePath = Path.of("test-file-Img");
+        String fileContent = Files.readString(filePath);
+        assertEquals("Check doesnt get img", List.of("https://www.google.com/"), MarkdownParse.getLinks(fileContent));
+    }
 }
