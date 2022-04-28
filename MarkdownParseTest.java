@@ -31,8 +31,15 @@ public class MarkdownParseTest {  // class for tests
 
     @Test
     public void testGetLinks2() throws IOException{
-        Path filePath = Path.of("test-file-Img");
+        Path filePath = Path.of("test-file-Img.md");
         String fileContent = Files.readString(filePath);
         assertEquals("Check doesnt get img", List.of("https://www.google.com/"), MarkdownParse.getLinks(fileContent));
+    }
+
+    @Test
+    public void testFileBackwards() throws IOException{
+        Path filePath = Path.of("file-backward.md");
+        String fileContent = Files.readString(filePath);
+        assertEquals("Check doesnt get link", List.of("https://www.google.com/"), MarkdownParse.getLinks(fileContent));
     }
 }
